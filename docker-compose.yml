@@ -9,6 +9,9 @@ services:
     networks:
       - blockchain
 
+  proof_service:
+    build: ./services/proof
+
   webpack_dev_server:
     build: ./services/app
     command: yarn start
@@ -30,6 +33,12 @@ services:
       - blockchain
     volumes:
       - ./services/prover/aggregator:/usr/src/app/aggregator
+
+  test:
+    build: ./services/test
+    command: python test.py
+    volumes:
+      - ./services/test:/usr/src/app/test
 
 networks:
   blockchain:
