@@ -18,6 +18,16 @@ services:
       - ./services/app:/usr/src/app
     networks:
       - blockchain
+      - client
+
+  proof_service:
+    build: ./services/proof
+    ports:
+      - 18861
+    networks:
+      - operator
+    volumes:
+      - ./services/proof/main.py:/root/rpyc/main.py
 
   aggregator:
     build: ./services/prover
@@ -28,8 +38,11 @@ services:
       - testrpc
     networks:
       - blockchain
+      - operator
     volumes:
       - ./services/prover/aggregator:/usr/src/app/aggregator
 
 networks:
   blockchain:
+  operator:
+  client:
