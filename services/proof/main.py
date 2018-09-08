@@ -1,4 +1,5 @@
 import rpyc
+from prover import generate_transfer_proof
 
 
 class ProofService(rpyc.Service):
@@ -15,9 +16,10 @@ class ProofService(rpyc.Service):
         print('Disconnected from proof service!')
         pass
 
-    def exposed_proof(self):
+    def exposed_proof(self, txs):
         print('Received request for zksnark proof.')
-        return 42
+        root, proof = generate_transfer_proof(txs)
+        return proof
 
 
 if __name__ == "__main__":

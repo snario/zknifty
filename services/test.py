@@ -19,13 +19,13 @@
 
 import sys
 
-sys.path.insert(0, '../depends/roll_up/pythonWrapper')
-sys.path.insert(0, '../depends/roll_up/contracts')
+sys.path.insert(0, 'proof/depends/roll_up/pythonWrapper')
+sys.path.insert(0, 'proof/depends/roll_up/contracts')
 sys.path.insert(0, 'prover')
 sys.path.insert(0, 'signer')
 
-from wallet import Wallet
-from prover import Prover
+# from wallet import Wallet
+from proof.prover import Prover
 from contract_deploy import contract_deploy
 
 from constants import *
