@@ -1,10 +1,12 @@
+import os
 import sys
 sys.path.insert(0, "../../depends/roll_up/pythonWrapper")
 sys.path.insert(0, "../")
 
 from wallet import Wallet
-from constants import rhs_leaf
 from .web_service import WebService
+
+rhs_leaf = os.environ["RHS_LEAF"]
 
 class Client(object):
     def __init__(self, wallet, web_service):
