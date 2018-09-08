@@ -29,6 +29,18 @@ services:
     volumes:
       - ./services/proof/main.py:/root/rpyc/main.py
 
+  wallet:
+    build: ./services/signer
+    command: python -m signer --host 0.0.0.0 --port 5001
+    ports:
+      - 5001:5001
+    networks:
+      - client
+    volumes:
+      - ./services/signer/signer:/usr/src/app/signer
+    env_file:
+      - .default.env
+
   aggregator:
     build: ./services/illuminati
     command: python -m aggregator --host 0.0.0.0 --port 5000
@@ -36,6 +48,7 @@ services:
       - 5000:5000
     depends_on:
       - testrpc
+      - proof_service
     networks:
       - blockchain
       - illuminati

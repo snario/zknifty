@@ -32,8 +32,8 @@ class Wallet(object):
 
     def hash_padded(self, left, right):
         x1 = int(left , 16).to_bytes(32, "big")
-        x2 = int(right , 16).to_bytes(32, "big")    
-        data = x1 + x2 
+        x2 = int(right , 16).to_bytes(32, "big") 
+        data = x1 + x2
         answer = hashlib.sha256(data).hexdigest()
         return "0x" + answer
 

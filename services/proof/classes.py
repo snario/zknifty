@@ -1,4 +1,4 @@
-# FIXME: Remove this and use json
+# FIXME: Remove this?
 
 # SignedTransferTransaction object that user sends to operator aggregating orders 
 #

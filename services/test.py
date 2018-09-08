@@ -28,7 +28,6 @@ sys.path.insert(0, 'signer')
 from proof.prover import Prover
 from contract_deploy import contract_deploy
 
-from constants import tree_depth, rhs_leaf, alice, bob
 from classes import SignedTransferTransaction
 from utils import createLeaf, sha256, hashPadded, genMerkelTree
  
