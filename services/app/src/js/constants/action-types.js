@@ -1,0 +1,1 @@
+export const TRANSFER_TOKEN = "TRANSFER_TOKEN";
