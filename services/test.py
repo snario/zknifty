@@ -24,7 +24,7 @@ sys.path.insert(0, 'prover')
 sys.path.insert(0, 'signer')
 
 from wallet import Wallet
-from prover import *
+#from prover import *
 
 from constants import *
 from classes import *
@@ -69,11 +69,11 @@ if __name__ == "__main__":
         # Tx object
         txs.append(SignedTransferTransaction(wallet.public_key, wallet.secret_key, 1, r, s))
 
-        console.log(tx)
+        print(txs[j])
     
     # # Get zk proof and merkle root
-    genWitness(leaves, pub_x, pub_y, address, tree_depth, 
-                                 rhs_leaf, new_leaf , R_x, R_y, S)              
+    #genWitness(leaves, pub_x, pub_y, address, tree_depth, 
+    #                             rhs_leaf, new_leaf , R_x, R_y, S)              
 
     # proof["a"] = hex2int(proof["a"])
     # proof["a_p"] = hex2int(proof["a_p"])
