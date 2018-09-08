@@ -24,7 +24,7 @@ sys.path.insert(0, 'prover')
 sys.path.insert(0, 'signer')
 
 from wallet import Wallet
-#from prover import *
+# from prover import *
 
 from constants import *
 from classes import *
@@ -41,6 +41,8 @@ if __name__ == "__main__":
     # Wallet array
     wallets = []
     txs = []
+
+    prover = Prover()
 
     for i in range(nWallets):
         wallets.append(Wallet())
