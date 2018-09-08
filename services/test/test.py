@@ -18,27 +18,34 @@
 '''
 
 import sys
+import os
 
-sys.path.insert(0, 'proof/depends/roll_up/pythonWrapper')
-sys.path.insert(0, 'proof/depends/roll_up/contracts')
-sys.path.insert(0, 'prover')
-sys.path.insert(0, 'signer')
+sys.path.insert(0, '/root/roll_up/pythonWrapper')
+sys.path.insert(0, '/root/roll_up/contracts')
+sys.path.insert(0, '/root/rpyc')
+sys.path.insert(0, '/signer')
 
-# from wallet import Wallet
-from proof.prover import Prover
+from wallet import Wallet
+from prover import Prover
 from contract_deploy import contract_deploy
 
-from constants import *
-from classes import *
-from utils import *
-
+from classes import SignedTransferTransaction
+from utils import createLeaf, hashPadded
+from SparseMerkleTree import SparseMerkleTree
+ 
 nWallets = 4
-TREE_DEPTH = 1
+alice = [ os.environ['ALICE_PK_X'], os.environ['ALICE_PX_Y'] ]
+bob = [ os.environ['BOB_PK_X'], os.environ['BOB_PX_Y'] ]
+RHS_LEAF = os.environ['RHS_LEAF']
+TREE_DEPTH = ops.environ['TREE_DEPTH']
 
 if __name__ == "__main__":
+    # give nft 2 to alice and 3 to bob
+    leaves = { 2: createLeaf(alice, rhs_leaf), 3: createLeaf(bob, rhs_leaf) }
+    tree = SparseMerkleTree(4, leaves)
+    root = tree.root
     old_leaf = []
     new_leaf = []
-    root = "0x0" # TODO: Generate initial state tree
     roll_up = contract_deploy(
             TREE_DEPTH,
             "../depends/roll_up/keys/vk.json", 
@@ -83,7 +90,7 @@ if __name__ == "__main__":
         print(txs[j])
     
     # # Get zk proof and merkle root
-    #genWitness(leaves, pub_x, pub_y, address, tree_depth, 
+    #genWitness(leaves, pub_x, pub_y, address, TREE_DEPTH, 
     #                             rhs_leaf, new_leaf , R_x, R_y, S)              
 
     # proof["a"] = hex2int(proof["a"])
@@ -96,7 +103,7 @@ if __name__ == "__main__":
     # proof["k"] = hex2int(proof["k"])
     # proof["input"] = hex2int(proof["input"]) 
 
-    # #root , merkle_tree = utils.genMerkelTree(tree_depth, leaves[0])
+    # #root , merkle_tree = utils.genMerkelTree(TREE_DEPTH, leaves[0])
     # try:
 
     # except:

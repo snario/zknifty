@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+
+  test_env:
+    build: ./services/proof
+    command: bash
+    volumes:
+      - ./services/test:/test
+      - ./services/signer:/signer
