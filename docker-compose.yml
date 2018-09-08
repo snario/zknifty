@@ -9,9 +9,6 @@ services:
     networks:
       - blockchain
 
-  proof_service:
-    build: ./services/proof
-
   webpack_dev_server:
     build: ./services/app
     command: yarn start
@@ -21,6 +18,14 @@ services:
       - ./services/app:/usr/src/app
     networks:
       - blockchain
+      - client
+
+  proof_service:
+    build: ./services/proof
+    ports:
+      - 18861
+    networks:
+      - operator
 
   aggregator:
     build: ./services/prover
@@ -31,14 +36,11 @@ services:
       - testrpc
     networks:
       - blockchain
+      - operator
     volumes:
       - ./services/prover/aggregator:/usr/src/app/aggregator
 
-  test:
-    build: ./services/test
-    command: python test.py
-    volumes:
-      - ./services/test:/usr/src/app/test
-
 networks:
   blockchain:
+  operator:
+  client:
