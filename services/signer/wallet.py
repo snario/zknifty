@@ -1,6 +1,6 @@
 import sys
 # Add path to baby_jubjub_ecc dependency for ed25519 with baby_jubjub curve
-sys.path.insert(0, '../depends/roll_up/depends/baby_jubjub_ecc/tests')
+sys.path.insert(0, '../../depends/roll_up/depends/baby_jubjub_ecc/tests')
 
 import ed25519 as ed
 from exceptions import WalletException
@@ -18,11 +18,6 @@ class Wallet(object):
         return ed.signature(msg, self.secret_key, self.public_key) 
 
     def gen_key_pair(self):
-        if self.secret_key is not None or self.public_key is not None:
-            raise WalletException(
-                'wallet already has a key pair'
-            )
-
         sk = self.gen_salt(64)
         pk = ed.publickey(sk)
 
