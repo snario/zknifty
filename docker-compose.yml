@@ -10,17 +10,17 @@ services:
       - blockchain
 
   app:
-    build: ./app
+    build: ./services/app
     command: yarn start
     ports:
       - 8080:8080
     volumes:
-      - ./app:/usr/src/app
+      - ./services/app:/usr/src/app
     networks:
       - blockchain
 
   # proof_service:
-  #   build: ../roll_up
+  #   build: depends/roll_up
   #   working_dir: /root/roll_up
   #   command: flask serve
   #   depends_on:

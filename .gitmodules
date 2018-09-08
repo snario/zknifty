@@ -1,0 +1,3 @@
+[submodule "depends/roll_up"]
+	path = depends/roll_up
+	url = https://github.com/snario/roll_up
