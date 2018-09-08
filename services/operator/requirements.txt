@@ -5,4 +5,5 @@ gevent-websocket==0.10.1
 websocket==0.2.1
 requests
 web3==4.6.0
+rpyc==4.0.2
 py-solc

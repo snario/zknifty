@@ -1,8 +1,9 @@
 # Aggregator class that will submit things
-
+import rpyc
 
 class Aggregator(object):
     def __init__(self, authority, verifier):
+        self.proof_service_conn = rpyc.connect("proof_service", 18861)
         self.verifier = verifier
         self.authority = authority
         self.coin_owners = {}
@@ -24,13 +25,14 @@ class Aggregator(object):
         """
             Should return merkle proof of inclusion for `uid`
         """
-        return '0'
+        return str(self.proof_service_conn.root.proof())
 
     def prove(self):
         """
             prove.py stuff for generating 
             the proof for the current state
         """
+        print(self.proof_service_conn)
         return '0' * 32
 
     def submit_state(self):
