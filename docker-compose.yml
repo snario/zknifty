@@ -30,7 +30,7 @@ services:
       - ./services/proof/main.py:/root/rpyc/main.py
 
   aggregator:
-    build: ./services/operator
+    build: ./services/illuminati
     command: python -m aggregator --host 0.0.0.0 --port 5000
     ports:
       - 5000:5000
@@ -40,7 +40,7 @@ services:
       - blockchain
       - operator
     volumes:
-      - ./services/operator/aggregator:/usr/src/app/aggregator
+      - ./services/illuminati/aggregator:/usr/src/app/aggregator
 
 networks:
   blockchain:
