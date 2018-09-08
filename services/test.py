@@ -49,12 +49,15 @@ if __name__ == "__main__":
 
     # Wallet array
     wallets = []
+    txs = []
+
+    prover = Prover()
 
     for i in range(nWallets):
         wallets.append(Wallet())
 
     # Iterate over transactions
-    for j in range(len(nWallets-1)):
+    for j in range(nWallets-1):
 
         # New wallet
         wallet = wallets[j]
@@ -75,10 +78,12 @@ if __name__ == "__main__":
         r,s = wallet.sign(message)
 
         # Tx object
-        tx = SignedTransferTransaction(wallet.public_key, wallet.secret_key, 1, r, s)
+        txs.append(SignedTransferTransaction(wallet.public_key, wallet.secret_key, 1, r, s))
+
+        print(txs[j])
     
     # # Get zk proof and merkle root
-    # proof, root = genWitness(leaves, pub_x, pub_y, address, tree_depth, 
+    #genWitness(leaves, pub_x, pub_y, address, tree_depth, 
     #                             rhs_leaf, new_leaf , R_x, R_y, S)              
 
     # proof["a"] = hex2int(proof["a"])
