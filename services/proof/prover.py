@@ -19,10 +19,9 @@
 
 
 import sys
-sys.path.insert(0, '../../depends/roll_up/pythonWrapper')
-sys.path.insert(0, "../../depends/roll_up/depends/baby_jubjub_ecc/tests")
-
-sys.path.insert(0, '../../depends/roll_up/contracts')
+sys.path.insert(0, './depends/roll_up/pythonWrapper')
+sys.path.insert(0, "./depends/roll_up/depends/baby_jubjub_ecc/tests")
+sys.path.insert(0, './depends/roll_up/contracts')
 from contract_deploy import contract_deploy, verify, hex2int
 
 from helper import *
