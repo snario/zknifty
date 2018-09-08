@@ -36,6 +36,9 @@ class ConnectedForm extends Component {
 
   render() {
     const { title } = this.state;
+
+    // TODO: Figure out which tokens the guy owns
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
