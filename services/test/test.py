@@ -20,13 +20,13 @@
 import sys
 import os
 
-sys.path.insert(0, 'proof/depends/roll_up/pythonWrapper')
-sys.path.insert(0, 'proof/depends/roll_up/contracts')
-sys.path.insert(0, 'prover')
-sys.path.insert(0, 'signer')
+sys.path.insert(0, '/root/roll_up/pythonWrapper')
+sys.path.insert(0, '/root/roll_up/contracts')
+sys.path.insert(0, '/root/rpycs')
+sys.path.insert(0, '/root/signer')
 
-# from wallet import Wallet
-from proof.prover import Prover
+from wallet import Wallet
+from prover import Prover
 from contract_deploy import contract_deploy
 
 from classes import SignedTransferTransaction
@@ -39,7 +39,7 @@ RHS_LEAF = os.environ['RHS_LEAF']
 TREE_DEPTH = ops.environ['TREE_DEPTH']
 
 if __name__ == "__main__":
-    alice_leaf = createLeaf(alice, RHS_LEAF))
+    alice_leaf = createLeaf(alice, RHS_LEAF)
     leaves = [alice, bob]
     root, merkle_tree = genMerkelTree(TREE_DEPTH, leaves)
     old_leaf = []
