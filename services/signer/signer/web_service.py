@@ -8,7 +8,7 @@ class WebService(object):
         self.timeout = timeout
 
     def request(self, end_point, method, params=None, data=None, headers=None):
-        url = self.base_url = end_point
+        url = self.base_url + end_point
 
         response = requests.request(
             method=method,
