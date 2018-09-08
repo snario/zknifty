@@ -28,14 +28,15 @@ sys.path.insert(0, 'signer')
 from proof.prover import Prover
 from contract_deploy import contract_deploy
 
-from constants import *
-from classes import *
-from utils import *
-
+from constants import tree_depth, rhs_leaf, alice, bob
+from classes import SignedTransferTransaction
+from utils import createLeaf, sha256, hashPadded, genMerkelTree
+ 
 nWallets = 4
-TREE_DEPTH = 1
 
 if __name__ == "__main__":
+    leaves = [alice, bob]
+    root, merkle_tree = genMerkelTree(tree_depth, leaves)
     old_leaf = []
     new_leaf = []
     root = "0x0" # TODO: Generate initial state tree

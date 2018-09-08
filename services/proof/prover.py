@@ -22,10 +22,8 @@ import sys
 sys.path.insert(0, '/root/roll_up/pythonWrapper')
 sys.path.insert(0, "/root/roll_up/depends/baby_jubjub_ecc/tests")
 sys.path.insert(0, '/root/roll_up/contracts')
-from contract_deploy import contract_deploy, verify, hex2int
 
 from helper import *
-from classes import SignedTransferTransaction
 from utils import getSignature, createLeaf, hashPadded, libsnark2python
 import ed25519 as ed
 
