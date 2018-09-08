@@ -19,74 +19,54 @@
 
 import sys
 
+sys.path.insert(0, '../depends/roll_up/pythonWrapper')
 sys.path.insert(0, 'prover')
 sys.path.insert(0, 'signer')
 
 from wallet import Wallet
 # from prover import *
 
+from constants import *
+from classes import *
+
+from utils import *
+
+nWallets = 4
+
 if __name__ == "__main__":
+
+    old_leaf = []
+    new_leaf = []
 
     # Wallet array
     wallets = []
 
-    for i in range(3):
+    for i in range(nWallets):
         wallets.append(Wallet())
-        print(wallets)
-    
-    # # Iterate over transactions
-    # for j in range (3):
 
+    # Iterate over transactions
+    for j in range(len(nWallets-1)):
 
-      
-    #     # create a random new leaf
-    #     # This is just a filler message for test purpose (e.g. 11111111... , 22222211111...)
-    #     rhs_leaf.append(hashPadded(hex(j)[2]*64 , "1"*64)[2:])
+        # New wallet
+        wallet = wallets[j]
         
-    #     # The old leaf is previous pubkey + previous message
-    #     old_leaf.append(createLeaf(public_key[j-1], rhs_leaf[j-1]))
+        # The old leaf is previous pubkey + previous message
+        old_leaf.append(createLeaf(wallet.public_key, rhs_leaf))
         
-    #     # The new leaf is current pubkey with current message
-    #     new_leaf.append(createLeaf(public_key[j], rhs_leaf[j]))
+        # The new leaf is current pubkey with current message
+        new_leaf.append(createLeaf(wallets[j+1].public_key, rhs_leaf))
         
-    #     # The message to sign is the previous leaf with the new leaf
-    #     message = hashPadded(old_leaf[j-1], new_leaf[j-1])
+        # The message to sign is the previous leaf with the new leaf
+        message = hashPadded(old_leaf[j], new_leaf[j])
         
-    #     # Remove '0x' from byte
-    #     message = message[2:]
-        
-    #     # Obtain Signature 
-    #     r,s = getSignature(message, sk[j - 1], public_key[j-1])
+        # Remove '0x' from byte
+        message = message[2:]
 
-    #     # check the signauer is correct
-    #     ed.checkvalid(r, s, message, public_key[j-1])
+        # Obtain Signature 
+        r,s = wallet.sign(message)
 
-    #     # Now we reverse the puplic key by bit
-    #     # we have to reverse the bits so that the 
-    #     # unpacker in libsnark will return us the 
-    #     # correct field element
-    #     # To put into little-endian
-    #     pub_key_x = hex(int(''.join(str(e) for e in hexToBinary(hex(public_key[j-1][0]))[::-1]),2)) 
-    #     pub_key_y = hex(int(''.join(str(e) for e in hexToBinary(hex(public_key[j-1][1]))[::-1]),2))
-           
-    #     r[0] = hex(int(''.join(str(e) for e in hexToBinary(hex(r[0]))[::-1]),2))
-    #     r[1] = hex(int(''.join(str(e) for e in hexToBinary(hex(r[1]))[::-1]),2))
-        
-    #     # Two r on x and y axis of curve
-    #     R_x.append(r[0])
-    #     R_y.append(r[1])
-        
-    #     # Store s
-    #     S.append(s)
-        
-    #     # Store public key
-    #     pub_x.append(pub_key_x) 
-    #     pub_y.append(pub_key_y)
-        
-        
-    #     leaves[j-1].append(old_leaf[j-1])
-
-    #     address.append(0)
+        # Tx object
+        tx = SignedTransferTransaction(wallet.public_key, wallet.secret_key, 1, r, s)
     
     # # Get zk proof and merkle root
     # proof, root = genWitness(leaves, pub_x, pub_y, address, tree_depth, 
