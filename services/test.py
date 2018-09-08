@@ -24,6 +24,7 @@ sys.path.insert(0, 'prover')
 sys.path.insert(0, 'signer')
 
 from wallet import Wallet
+from transaction import SignedTransferTransaction
 # from prover import *
 
 from constants import *
