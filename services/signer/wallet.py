@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, '../depends/roll_up/depends/baby_jubjub_ecc/tests')
 
 import ed25519 as ed
-from .exceptions import WalletException
+from exceptions import WalletException
 import random
 
 class Wallet(object):

@@ -22,8 +22,8 @@ import sys
 sys.path.insert(0, 'prover')
 sys.path.insert(0, 'signer')
 
-from wallet import *
-from prover import *
+from wallet import Wallet
+# from prover import *
 
 if __name__ == "__main__":
 
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     wallets = []
 
     for i in range(3):
-        wallets.append(wallet.Wallet())
+        wallets.append(Wallet())
         print(wallets)
     
     # # Iterate over transactions
@@ -109,10 +109,3 @@ if __name__ == "__main__":
 
     #     raise
 
-
-
-
-       
-
-
-   
