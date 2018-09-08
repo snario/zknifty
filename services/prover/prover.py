@@ -25,6 +25,7 @@ sys.path.insert(0, "../../depends/roll_up/depends/baby_jubjub_ecc/tests")
 sys.path.insert(0, '../../depends/roll_up/contracts')
 from contract_deploy import contract_deploy, verify, hex2int
 
+from 
 from helper import *
 from classes import * 
 from utils import getSignature, createLeaf, hashPadded, libsnark2python
@@ -38,9 +39,6 @@ w3 = Web3(HTTPProvider(f"http://{host}:8545"));
 # Place to store prover and verifier keys
 pk_output = "../zksnark_element/pk.raw"  # Prover key
 vk_output = "../zksnark_element/vk.json" # Verifier key
-
-# Trivial leaf RHS
-rhs_leaf = (hashPadded(hex(1)[2]*64 , "1"*64)[2:])
 
 def GenerateMassTransferProof(signedTransferTransactions):
 
