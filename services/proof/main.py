@@ -24,4 +24,5 @@ if __name__ == "__main__":
     from rpyc.utils.server import ThreadedServer
     t = ThreadedServer(ProofService, port=18861)
     print("Starting rpyc proof service.")
+    print("Listening on 0.0.0.0:18861")
     t.start()

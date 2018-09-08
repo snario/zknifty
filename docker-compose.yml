@@ -26,6 +26,8 @@ services:
       - 18861
     networks:
       - operator
+    volumes:
+      - ./services/proof/main.py:/root/rpyc/main.py
 
   aggregator:
     build: ./services/prover
