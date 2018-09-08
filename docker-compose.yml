@@ -9,7 +9,7 @@ services:
     networks:
       - blockchain
 
-  app:
+  webpack_dev_server:
     build: ./services/app
     command: yarn start
     ports:
@@ -19,14 +19,17 @@ services:
     networks:
       - blockchain
 
-  # proof_service:
-  #   build: depends/roll_up
-  #   working_dir: /root/roll_up
-  #   command: flask serve
-  #   depends_on:
-  #     - testrpc
-  #   networks:
-  #     - blockchain
+  aggregator:
+    build: ./services/prover
+    command: python -m aggregator --host 0.0.0.0 --port 5000
+    ports:
+      - 5000:5000
+    depends_on:
+      - testrpc
+    networks:
+      - blockchain
+    volumes:
+      - ./services/prover/aggregator:/usr/src/app/aggregator
 
 networks:
   blockchain:
