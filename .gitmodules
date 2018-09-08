@@ -1,3 +1,6 @@
 [submodule "depends/roll_up"]
 	path = services/proof/depends/roll_up
 	url = https://github.com/snario/roll_up
+[submodule "services/proof/depends/roll_up"]
+	path = services/proof/depends/roll_up
+	url = git@github.com:snario/roll_up.git
