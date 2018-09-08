@@ -30,14 +30,14 @@ services:
       - ./services/proof/main.py:/root/rpyc/main.py
 
   wallet:
-    build: ./services/signer
+    build: ./services/wallet
     command: python -m signer --host 0.0.0.0 --port 5001
     ports:
       - 5001:5001
     networks:
       - client
     volumes:
-      - ./services/signer/signer:/usr/src/app/signer
+      - ./services/wallet/signer:/usr/src/app/signer
     env_file:
       - .default.env
 
