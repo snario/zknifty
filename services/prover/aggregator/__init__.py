@@ -5,7 +5,7 @@ def create_app(is_unit_test=False):
     app = Flask(__name__)
 
     if not is_unit_test:
-        from prover.dependency_config import container
+        from dependency_config import container
         # Create a child chain instance when creating a Flask app.
         container.get_aggregator()
 

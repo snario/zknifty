@@ -1,6 +1,6 @@
 # Flask API for submitting info / retrieving data
 
-`python -m prover.aggregator` to launch
+`python -m aggregator` to launch
 
 ## Example interaction
 

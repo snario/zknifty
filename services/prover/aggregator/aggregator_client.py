@@ -6,6 +6,7 @@ import websocket
 
 from .exceptions import RequestFailedException
 
+
 class AggregatorClient(object):
 
     def __init__(self, base_url, ws_url, verify=False, timeout=5):
@@ -45,7 +46,8 @@ class AggregatorClient(object):
             return response
         else:
             raise RequestFailedException(
-                'failed reason: {}, text: {}'.format(response.reason, response.text)
+                'failed reason: {}, text: {}'.format(
+                    response.reason, response.text)
             )
 
     def get_owner(self, uid):
