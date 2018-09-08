@@ -22,8 +22,8 @@ import os
 
 sys.path.insert(0, '/root/roll_up/pythonWrapper')
 sys.path.insert(0, '/root/roll_up/contracts')
-sys.path.insert(0, '/root/rpycs')
-sys.path.insert(0, '/root/signer')
+sys.path.insert(0, '/root/rpyc')
+sys.path.insert(0, '/signer')
 
 from wallet import Wallet
 from prover import Prover
