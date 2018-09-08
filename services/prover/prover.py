@@ -34,14 +34,7 @@ from web3 import Web3, HTTPProvider, TestRPCProvider
 
 class Prover(object):
 
-    # Place to store prover and verifier keys
-    pk_output = "../zksnark_element/pk.raw"  # Prover key
-    vk_output = "../zksnark_element/vk.json" # Verifier key
-    def __init__(pk_output, vk_output, roll_up):
-        host = sys.argv[1] if len(sys.argv) > 1 else "localhost"
-        w3 = Web3(HTTPProvider(f"http://{host}:8545"));
-        self.pk = pk_output
-        self.vk_output = vk_output
+    def __init__(self, roll_up):
         self.roll_up = roll_up
 
     def submit_proof(self, proof):

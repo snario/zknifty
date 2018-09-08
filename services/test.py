@@ -20,24 +20,32 @@
 import sys
 
 sys.path.insert(0, '../depends/roll_up/pythonWrapper')
+sys.path.insert(0, '../depends/roll_up/contracts')
 sys.path.insert(0, 'prover')
 sys.path.insert(0, 'signer')
 
 from wallet import Wallet
-from transaction import SignedTransferTransaction
-# from prover import *
+from prover import Prover
+from contract_deploy import contract_deploy
 
 from constants import *
 from classes import *
-
 from utils import *
 
 nWallets = 4
+TREE_DEPTH = 1
 
 if __name__ == "__main__":
-
     old_leaf = []
     new_leaf = []
+    root = "0x0" # TODO: Generate initial state tree
+    roll_up = contract_deploy(
+            TREE_DEPTH,
+            "../depends/roll_up/keys/vk.json", 
+            root,
+            "../depends/roll_up/contracts",
+            )
+    prover = Prover(roll_up)
 
     # Wallet array
     wallets = []
