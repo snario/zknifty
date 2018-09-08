@@ -18,6 +18,7 @@
 '''
 
 import sys
+import os
 
 sys.path.insert(0, 'proof/depends/roll_up/pythonWrapper')
 sys.path.insert(0, 'proof/depends/roll_up/contracts')
@@ -32,10 +33,15 @@ from classes import SignedTransferTransaction
 from utils import createLeaf, sha256, hashPadded, genMerkelTree
  
 nWallets = 4
+alice = [ os.environ['ALICE_PK_X'], os.environ['ALICE_PX_Y'] ]
+bob = [ os.environ['BOB_PK_X'], os.environ['BOB_PX_Y'] ]
+RHS_LEAF = os.environ['RHS_LEAF']
+TREE_DEPTH = ops.environ['TREE_DEPTH']
 
 if __name__ == "__main__":
+    alice_leaf = createLeaf(alice, RHS_LEAF))
     leaves = [alice, bob]
-    root, merkle_tree = genMerkelTree(tree_depth, leaves)
+    root, merkle_tree = genMerkelTree(TREE_DEPTH, leaves)
     old_leaf = []
     new_leaf = []
     root = "0x0" # TODO: Generate initial state tree
@@ -83,7 +89,7 @@ if __name__ == "__main__":
         print(txs[j])
     
     # # Get zk proof and merkle root
-    #genWitness(leaves, pub_x, pub_y, address, tree_depth, 
+    #genWitness(leaves, pub_x, pub_y, address, TREE_DEPTH, 
     #                             rhs_leaf, new_leaf , R_x, R_y, S)              
 
     # proof["a"] = hex2int(proof["a"])
@@ -96,7 +102,7 @@ if __name__ == "__main__":
     # proof["k"] = hex2int(proof["k"])
     # proof["input"] = hex2int(proof["input"]) 
 
-    # #root , merkle_tree = utils.genMerkelTree(tree_depth, leaves[0])
+    # #root , merkle_tree = utils.genMerkelTree(TREE_DEPTH, leaves[0])
     # try:
 
     # except:
