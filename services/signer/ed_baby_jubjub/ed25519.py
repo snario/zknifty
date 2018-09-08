@@ -3,6 +3,7 @@
 
 import hashlib
 import pdb
+from .sapling_jubjub import *
 import codecs 
 
 

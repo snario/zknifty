@@ -1,7 +1,7 @@
 #https://github.com/zcash-hackworks/zcash-test-vectors
 
 #!/usr/bin/env python3
-from sapling_utils import i2lebsp, leos2ip, i2leosp
+from .sapling_utils import i2lebsp, leos2ip, i2leosp
 
 
 import pdb
