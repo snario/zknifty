@@ -13,7 +13,7 @@ from .SparseMerkleTree import SparseMerkleTree
 
 class Aggregator(object):
     def __init__(self, authority, verifier): # init_balances is a dictionary of balances per user
-        # self.proof_service_conn = rpyc.connect("proof_service", 18861)
+        self.proof_service_conn = rpyc.connect("proof_service", 18861)
         alice = [ int(os.environ['ALICE_PK_X']), int(os.environ['ALICE_PK_Y']) ]
         bob = [ int(os.environ['BOB_PK_X']), int(os.environ['BOB_PK_Y']) ]
         coin_owners = { 0: alice, 1: alice, 2: bob, 3: bob}
