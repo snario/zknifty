@@ -22,12 +22,14 @@ class ConnectedMerkleRoot extends Component {
 
     this.state = {
       merkleRoot: "Loading ...",
-      blockNumber: -1,
+      blockNumber: "Loading ...",
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
     provider.on('block', this.handleBlockMined.bind(this));
+
+    setInterval(() => provider.send("evm_mine"), 5000);
   }
 
   handleBlockMined(blockNumber) {
@@ -78,15 +80,3 @@ ConnectedMerkleRoot.propTypes = {
 };
 
 export default MerkleRoot;
-
-
-
-        {/* <h2> { merkleRoot }</h2>
-        <button
-            type="submit"
-            className="btn btn-success btn-lg"
-            onClick={ this.handleSubmit }
-        >
-          Refresh
-        </button>
-      </div> */}
