@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import uuidv1 from "uuid";
-import { transferToken } from "../actions/index";
+import { requestTransferToken } from "../actions/index";
 
 const mapDispatchToProps = dispatch => {
   return {
-    transferToken: article => dispatch(transferToken(article))
+    requestTransferToken: article => dispatch(requestTransferToken(article))
   };
 };
 
@@ -30,7 +30,7 @@ class ConnectedForm extends Component {
     event.preventDefault();
     const { title } = this.state;
     const id = uuidv1();
-    this.props.transferToken({ title, id });
+    this.props.requestTransferToken({ title, id });
     this.setState({ title: "" });
   }
 
@@ -62,7 +62,7 @@ class ConnectedForm extends Component {
 const Form = connect(null, mapDispatchToProps)(ConnectedForm);
 
 ConnectedForm.propTypes = {
-  transferToken: PropTypes.func.isRequired
+  requestTransferToken: PropTypes.func.isRequired
 };
 
 export default Form;
