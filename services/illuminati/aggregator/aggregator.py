@@ -12,7 +12,7 @@ from .SparseMerkleTree import SparseMerkleTree
 
 class Aggregator(object):
     def __init__(self, authority, verifier):
-        # self.proof_service_conn = rpyc.connect("proof_service", 18861)
+        self.proof_service_conn = rpyc.connect("proof_service", 18861)
         self.verifier = verifier
         self.authority = authority
         self.coin_owners = {}

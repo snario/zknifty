@@ -32,7 +32,7 @@ ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/lib
 
 WORKDIR /root/rpyc
 
-COPY requirements.txt classes.py main.py prover.py ./
+COPY SparseMerkleTree.py requirements.txt classes.py main.py prover.py ./
 
 RUN pip3 install -r requirements.txt
 
