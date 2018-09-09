@@ -16,6 +16,6 @@ Merkle trees can lead to significant data compression for smart contracts, where
 The token contract will accept a new merkle root **only if** all the conditions above are met. This is possible by providing a zk-SNARK proof to the token contract with the new merkle root. Additional conditions are needed to make the contract secure, hence **this contract is not to be used in production**. 
 
 
-
+---
 
 **Presentation Slides** : https://docs.google.com/presentation/d/1aHfaHy_FPxF0fHw-9EuCTUImhFxwRv63mDTZMPVgdg0/edit?usp=sharing
