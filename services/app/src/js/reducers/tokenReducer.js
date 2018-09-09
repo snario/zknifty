@@ -19,6 +19,15 @@ const tokenReducer = (state = [], action) => {
     case REQUEST_TRANSFER_TOKEN:
       return [...state, action.payload];
     case RECEIVE_MERKLE_PROOF:
+      console.log('Verified merkle proof')
+      console.log('state is ', state)
+      let received_uid = action.uid.uid
+      for(let i = 0 ; i< state.length; i++) {
+          if (state[i].uid == parseInt(received_uid)) {
+              state[i].verified = true
+          }
+      }
+      console.log('updated state', state)
       // TODO: figure out if actually true
       // data type is { "${uid}": ${proof} }
       return state;
