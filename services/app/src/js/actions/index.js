@@ -23,7 +23,7 @@ export const fetchMerkleRoot = () => {
     dispatch(requestMerkleRoot());
     return new ethers
       .Contract(
-        "0x621c4366CE025B514dF4380A5032587984A6f8A5",
+        process.env.MIXIMUS_ADDR,
         require("./roll_up.json").abi,
         new ethers.providers.JsonRpcProvider(process.env.ETHEREUM_JSONRPC_URL)
       )

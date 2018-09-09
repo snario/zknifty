@@ -61,11 +61,19 @@ class ConnectedMerkleRoot extends Component {
           </tr>
           <tr>
             <td>Token A Owner</td>
-            <td>{ 3 }</td>
+            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
           </tr>
           <tr>
             <td>Token B Owner</td>
-            <td>{ 4 }</td>
+            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
+          </tr>
+          <tr>
+            <td>Token C Owner</td>
+            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
+          </tr>
+          <tr>
+            <td>Token D Owner</td>
+            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
           </tr>
         </tbody>
       </table>
