@@ -2,13 +2,15 @@ version: "3"
 
 services:
 
-  testrpc:
-    image: trufflesuite/ganache-cli:v6.1.8
-    command: -m "gravity top burden flip student usage spell purchase hundred improve check genre"
+  ethereum:
+    build: ./services/ethereum
+    command: -m fire fire fire fire fire fire fire fire fire fire fire fire
     ports:
       - 8545:8545
     networks:
       - blockchain
+    volumes:
+      - ./services/ethereum:/ethereum
 
   webpack_dev_server:
     build: ./services/app
@@ -52,7 +54,7 @@ services:
     ports:
       - 5000:5000
     depends_on:
-      - testrpc
+      - ethereum
       - proof_service
     networks:
       - blockchain
