@@ -4,6 +4,7 @@ services:
 
   testrpc:
     image: trufflesuite/ganache-cli:v6.1.8
+    command: -m "gravity top burden flip student usage spell purchase hundred improve check genre"
     ports:
       - 8545:8545
     networks:
