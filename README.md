@@ -10,7 +10,7 @@ Merkle trees can lead to significant data compression for smart contracts, where
 
 * The actual owner of the token to be transferred signed a message
 * This message is composed of the token ID and the receiver address
-* The signature is valid (eddcsa signature scheme)
+* The signature is valid (eddsa signature scheme)
 * The token transfer is reflected in the new merkle tree
 
 The token contract will accept a new merkle root **only if** all the conditions above are met. This is possible by providing a zk-SNARK proof to the token contract with the new merkle root. Additional conditions are needed to make the contract secure, hence **this contract is not to be used in production**. 
