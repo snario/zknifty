@@ -7,8 +7,12 @@ import { fetchMerkleRoot } from "../actions";
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMerkleRoot: article => dispatch(fetchMerkleRoot(article))
+    fetchMerkleRoot: () => dispatch(fetchMerkleRoot())
   };
+};
+
+const mapStateToProps = state => {
+  return { merkleRoot: state.merkleRoot };
 };
 
 const provider = new ethers
@@ -21,32 +25,28 @@ class ConnectedMerkleRoot extends Component {
     super();
 
     this.state = {
-      merkleRoot: "Loading ...",
       blockNumber: "Loading ...",
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-
     provider.on('block', this.handleBlockMined.bind(this));
 
-    setInterval(() => provider.send("evm_mine"), 5000);
+    setInterval(function f () {
+      provider.send("evm_mine");
+      return f;
+    }(), 5000);
+
   }
 
   handleBlockMined(blockNumber) {
     this.setState({blockNumber});
   }
 
-  async handleSubmit() {
-    const hash = await this.props.fetchMerkleRoot(42);
-    this.setState({ merkleRoot: "TODO: get merkle root" });
-  }
-
   componentDidMount() {
-    this.handleSubmit();
+    this.props.fetchMerkleRoot();
   }
 
   render() {
-    const { merkleRoot, blockNumber } = this.state;
+    const { blockNumber } = this.state;
 
     return (
       <table className="table">
@@ -57,15 +57,23 @@ class ConnectedMerkleRoot extends Component {
           </tr>
           <tr>
             <td>Merkle Root</td>
-            <td>{ merkleRoot }</td>
+            <td>{ this.props.merkleRoot }</td>
           </tr>
           <tr>
             <td>Token A Owner</td>
-            <td>{ merkleRoot }</td>
+            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
           </tr>
           <tr>
             <td>Token B Owner</td>
-            <td>{ merkleRoot }</td>
+            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
+          </tr>
+          <tr>
+            <td>Token C Owner</td>
+            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
+          </tr>
+          <tr>
+            <td>Token D Owner</td>
+            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
           </tr>
         </tbody>
       </table>
@@ -73,7 +81,7 @@ class ConnectedMerkleRoot extends Component {
   }
 }
 
-const MerkleRoot = connect(null, mapDispatchToProps)(ConnectedMerkleRoot);
+const MerkleRoot = connect(mapStateToProps, mapDispatchToProps)(ConnectedMerkleRoot);
 
 ConnectedMerkleRoot.propTypes = {
   fetchMerkleRoot: PropTypes.func.isRequired

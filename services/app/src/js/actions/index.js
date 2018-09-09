@@ -1,4 +1,5 @@
 import fetch from "cross-fetch";
+import ethers from "ethers";
 
 export const requestTransferToken = transferDetails => ({
   type: "REQUEST_TRANSFER_TOKEN",
@@ -9,19 +10,25 @@ export const requestMerkleRoot = () => ({
   type: "REQUEST_MERKLE_ROOT"
 });
 
-export const receiveMerkleRoot = (json) => ({
-  type: "REQUEST_MERKLE_ROOT",
-  data: json
+export const receiveMerkleRoot = (merkleRoot) => ({
+  type: "RECEIVE_MERKLE_ROOT",
+  merkleRoot
 });
 
-export const fetchMerkleRoot = identityProof => {
+export const fetchMerkleRoot = () => {
+  // TODO: Should we use the fetch library instead of ethers?
+  // TODO: Error handling for blockchain not responding 
+  // TODO: Don't use ABI, use ethers.js string interface
   return dispatch => {
     dispatch(requestMerkleRoot());
-    return fetch(`${process.env.ILLUMINATI_URL}/proof/${identityProof}`)
-      .then(
-        response => response.json(),
-        error => console.log("❌ An error occurred.", error)
+    return new ethers
+      .Contract(
+        process.env.MIXIMUS_ADDR,
+        require("./roll_up.json").abi,
+        new ethers.providers.JsonRpcProvider(process.env.ETHEREUM_JSONRPC_URL)
       )
-      .then(json => dispatch(receiveMerkleRoot(json)));
+      .functions
+      .getRoot()
+      .then(merkleRoot => dispatch(receiveMerkleRoot(merkleRoot)));
   };
 };

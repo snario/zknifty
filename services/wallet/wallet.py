@@ -57,7 +57,7 @@ class Wallet(object):
         return "".join(salt)
 
     def create_rhs_leaf(self, token_id):
-        return self.hash_padded(hex(token_id)[2] * 64, "1" * 64)[2:]
+        return str(token_id)
 
     def create_leaf(self, pub_key, msg):
         pk = ed.encodepoint(pub_key)
