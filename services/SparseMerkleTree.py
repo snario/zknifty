@@ -26,7 +26,7 @@ class SparseMerkleTree(object):
     def create_default_nodes(self, depth):
         # Default nodes are the nodes whose children are both empty nodes at
         # each level.
-        default_leaf = '0x00000000000000000000000000000000'
+        default_leaf = '0x' + '0' * 64
         default_nodes = [default_leaf]
         for level in range(1, depth + 1):
             prev_default = default_nodes[level - 1]
