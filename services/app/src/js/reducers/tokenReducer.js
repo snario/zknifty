@@ -1,4 +1,4 @@
-import { REQUEST_TRANSFER_TOKEN, RECEIVE_MY_TOKENS } from "../constants/action-types";
+import { REQUEST_TRANSFER_TOKEN, RECEIVE_MY_TOKENS, RECEIVE_MERKLE_PROOF } from "../constants/action-types";
 
 // const STARTING_BALANCES = [
 //   {
@@ -15,9 +15,13 @@ import { REQUEST_TRANSFER_TOKEN, RECEIVE_MY_TOKENS } from "../constants/action-t
 const tokenReducer = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_MY_TOKENS:
-      return action.tokens;
+      return action.tokens.map(x => ({...x, verified: false}));
     case REQUEST_TRANSFER_TOKEN:
       return [...state, action.payload];
+    case RECEIVE_MERKLE_PROOF:
+      // TODO: figure out if actually true
+      // data type is { "${uid}": ${proof} }
+      return state;
     default:
       return state;
   }
