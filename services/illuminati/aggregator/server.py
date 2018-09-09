@@ -7,7 +7,8 @@ aggregator = Blueprint('aggregator', __name__)
 
 @api.route('/proof/<uid>', methods=['GET'])
 def get_proof(uid):
-    return container.get_aggregator().get_proof(int(uid))
+    return jsonify(
+            {uid: container.get_aggregator().get_proof(int(uid))})
 
 @api.route('/owner/<uid>', methods=['GET'])
 def get_owner(uid):

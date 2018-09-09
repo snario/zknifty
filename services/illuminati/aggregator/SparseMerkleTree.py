@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from eth_utils.crypto import keccak
 import hashlib
 
 class SparseMerkleTree(object):
@@ -34,6 +35,9 @@ class SparseMerkleTree(object):
         return default_nodes
 
     def create_tree(self, ordered_leaves, depth, default_nodes):
+        for leaf in ordered_leaves:
+            ordered_leaves[leaf] = '0x' + keccak(ordered_leaves[leaf][0]).hex()
+
         tree = [ordered_leaves]
         tree_level = ordered_leaves
         for level in range(depth):
@@ -76,9 +80,9 @@ class SparseMerkleTree(object):
             sibling_index = index + 1 if index % 2 == 0 else index - 1
             index = index // 2
             if sibling_index in self.tree[level]:
-                proof += self.tree[level][sibling_index]
+                proof += self.tree[level][sibling_index].encode()
 
-        return proof
+        return '0x' + proof.hex()
 
     def verify(self, uid, proof):
         ''' Checks if the proof for the leaf at `uid` is valid'''

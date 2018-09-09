@@ -25,6 +25,13 @@ const provider = new ethers
   .providers
   .JsonRpcProvider(process.env.ETHEREUM_JSONRPC_URL);
 
+const UI = {
+  0: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg",
+  1: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg",
+  2: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg",
+  3: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg"
+}
+
 class ConnectedMerkleRoot extends Component {
 
   constructor() {
@@ -56,38 +63,37 @@ class ConnectedMerkleRoot extends Component {
     const { blockNumber } = this.state;
 
     return (
-      <table className="table">
-        <tbody>
-          <tr>
-            <td>Block Number</td>
-            <td>{ blockNumber }</td>
-          </tr>
-          <tr>
-            <td>Merkle Root</td>
-            <td>{ this.props.merkleRoot }</td>
-          </tr>
-          {
-            this.props.tokens.map(el => (
-              <tr key={ el.uid }>
-                <td>{ el.uid }</td>
-                <td>
-                  { el.title }
-                  <button
-                    className="btn btn-link"
-                    onClick={ () => this.props.fetchMerkleProof(el.uid) }>
-                    Verify
-                  </button>
-                  <button
-                    className="btn btn-link"
-                    onClick={ () => this.props.sendToken([process.env.ALICE_PK_X, process.env.ALICE_PK_Y], el.uid) }>
-                    Private Send
-                  </button>
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+      <div>
+        <p>Block Number: <code>{ blockNumber }</code></p>
+        <p>Merkle Root: <code>{ this.props.merkleRoot }</code></p>
+        <h2>My tokens</h2>
+        <div className="row">
+        {
+          this.props.tokens.map(el => (
+            <div key={ el.uid } className="mx-auto card" style={{"width": "18rem"}}>
+              <img className="card-img-top" src={ UI[el.uid] }/>
+              <div className="card-body">
+                <h5 className="card-title">{ el.title } { el.verified ? "✅" : "❓" }</h5>
+                <a
+                  onClick={ () => this.props.fetchMerkleProof(el.uid) }
+                  className="card-link"
+                  href="#"
+                >
+                  Verify
+                </a>
+                <a
+                  onClick={ () => this.props.sendToken([process.env.ALICE_PK_X, process.env.ALICE_PK_Y], el.uid) }
+                  className="card-link"
+                  href="#"
+                >
+                  Private Send
+                </a>
+              </div>
+            </div>
+          ))
+        }
+        </div>
+      </div>
     );
   }
 }
