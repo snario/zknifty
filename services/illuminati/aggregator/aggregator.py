@@ -1,6 +1,7 @@
 # Aggregator class that will submit things
 import rpyc
 import sys
+import os
 from os import path
 
 from .exceptions import TransactionAlreadyIncludedException
@@ -11,11 +12,14 @@ from .SparseMerkleTree import SparseMerkleTree
 #       of assuming it's valid
 
 class Aggregator(object):
-    def __init__(self, authority, verifier):
+    def __init__(self, authority, verifier): # init_balances is a dictionary of balances per user
         self.proof_service_conn = rpyc.connect("proof_service", 18861)
+        alice = [ os.environ['ALICE_PK_X'], os.environ['ALICE_PK_Y'] ]
+        bob = [ os.environ['BOB_PK_X'], os.environ['BOB_PK_Y'] ]
+        coin_owners = { 0: alice, 1: alice, 2: bob, 3: bob}
         self.verifier = verifier
         self.authority = authority
-        self.coin_owners = {}
+        self.coin_owners = coin_owners
         self.tree_depth = 2
         self.pending_transactions = {} # pending_transactions that get reset
                                        # after each commitment
