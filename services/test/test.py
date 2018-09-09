@@ -22,15 +22,16 @@ import os
 
 sys.path.insert(0, '/root/roll_up/pythonWrapper')
 sys.path.insert(0, '/root/roll_up/contracts')
-sys.path.insert(0, '/root/rpycs')
-sys.path.insert(0, '/root/signer')
+sys.path.insert(0, '/root/rpyc')
+sys.path.insert(0, '/signer')
 
 from wallet import Wallet
 from prover import Prover
 from contract_deploy import contract_deploy
 
 from classes import SignedTransferTransaction
-from utils import createLeaf, sha256, hashPadded, genMerkelTree
+from utils import createLeaf, hashPadded
+from SparseMerkleTree import SparseMerkleTree
  
 nWallets = 4
 alice = [ os.environ['ALICE_PK_X'], os.environ['ALICE_PX_Y'] ]
@@ -39,12 +40,12 @@ RHS_LEAF = os.environ['RHS_LEAF']
 TREE_DEPTH = ops.environ['TREE_DEPTH']
 
 if __name__ == "__main__":
-    alice_leaf = createLeaf(alice, RHS_LEAF)
-    leaves = [alice, bob]
-    root, merkle_tree = genMerkelTree(TREE_DEPTH, leaves)
+    # give nft 2 to alice and 3 to bob
+    leaves = { 2: createLeaf(alice, rhs_leaf), 3: createLeaf(bob, rhs_leaf) }
+    tree = SparseMerkleTree(4, leaves)
+    root = tree.root
     old_leaf = []
     new_leaf = []
-    root = "0x0" # TODO: Generate initial state tree
     roll_up = contract_deploy(
             TREE_DEPTH,
             "../depends/roll_up/keys/vk.json", 
