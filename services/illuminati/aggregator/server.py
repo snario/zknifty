@@ -7,7 +7,8 @@ aggregator = Blueprint('aggregator', __name__)
 
 @api.route('/proof/<uid>', methods=['GET'])
 def get_proof(uid):
-    return container.get_aggregator().get_proof(int(uid))
+    return jsonify(
+            {uid: container.get_aggregator().get_proof(int(uid))})
 
 @api.route('/owner/<uid>', methods=['GET'])
 def get_owner(uid):
@@ -25,8 +26,8 @@ def send_tx():
     uid = int(request.form['uid'])
     to_x = request.form['to_x']
     to_y = request.form['to_y']
-    # sig = request.form['sig']
-    return container.get_aggregator().send_transaction(uid, [to_x, to_y])
+    sig = request.form['sig']
+    return container.get_aggregator().send_transaction(uid, [to_x, to_y], sig)
 
 @aggregator.route('/submit_state', methods=['POST'])
 def submit_state():
