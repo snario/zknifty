@@ -4,10 +4,13 @@ services:
 
   ethereum:
     build: ./services/ethereum
+    command: -m fire fire fire fire fire fire fire fire fire fire fire fire
     ports:
       - 8545:8545
     networks:
       - blockchain
+    volumes:
+      - ./services/ethereum:/ethereum
 
   webpack_dev_server:
     build: ./services/app

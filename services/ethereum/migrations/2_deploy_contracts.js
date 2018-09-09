@@ -27,5 +27,6 @@ module.exports = function(deployer) {
             // FIXME: Use real root
             "0x1eaa408e63a9f398689c6dd1bff4607276c66172a0f7c9fa916473278158ecbe"
         );
+        await verifier.addIC(vk.IC);
     });
 };

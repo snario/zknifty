@@ -35,7 +35,7 @@ contract Verifier {
         Pairing.G1Point H;
     }
 
-    VerifyingKey verifyKey;
+    VerifyingKey public verifyKey;
 
     // Initialize parameters of the verifier. All generated from libsnark, we
     // pass them from the generated json file (`contract_deploy.py`)
@@ -82,7 +82,7 @@ contract Verifier {
         }
     }
 
-   function getIC(uint i) returns(uint, uint) {
+   function getIC(uint i) view returns(uint, uint) {
        return(verifyKey.IC[i].X, verifyKey.IC[i].Y);
    }
 
