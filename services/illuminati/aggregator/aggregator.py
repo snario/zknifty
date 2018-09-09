@@ -13,9 +13,9 @@ from .SparseMerkleTree import SparseMerkleTree
 
 class Aggregator(object):
     def __init__(self, authority, verifier): # init_balances is a dictionary of balances per user
-        self.proof_service_conn = rpyc.connect("proof_service", 18861)
-        alice = [ os.environ['ALICE_PK_X'], os.environ['ALICE_PK_Y'] ]
-        bob = [ os.environ['BOB_PK_X'], os.environ['BOB_PK_Y'] ]
+        # self.proof_service_conn = rpyc.connect("proof_service", 18861)
+        alice = [ int(os.environ['ALICE_PK_X']), int(os.environ['ALICE_PK_Y']) ]
+        bob = [ int(os.environ['BOB_PK_X']), int(os.environ['BOB_PK_Y']) ]
         coin_owners = { 0: alice, 1: alice, 2: bob, 3: bob}
         self.verifier = verifier
         self.authority = authority
@@ -53,6 +53,8 @@ class Aggregator(object):
 
     def get_coins(self, owner):
         # owner = edrecover(msg, sig) 
+        # print(owner)
+        # print(self.coin_owners)
         filtered_coins = { 
                 key : value 
                 for key, value in self.coin_owners.items() if
