@@ -26,7 +26,7 @@ sys.path.insert(0, '/root/rpyc')
 sys.path.insert(0, '/signer')
 
 from wallet import Wallet
-from prover import Prover
+from prover import generate_witness, generate_transfer_proof
 from contract_deploy import contract_deploy
 
 from classes import SignedTransferTransaction
@@ -42,7 +42,7 @@ TREE_DEPTH = ops.environ['TREE_DEPTH']
 if __name__ == "__main__":
     # give nft 2 to alice and 3 to bob
     leaves = { 2: createLeaf(alice, rhs_leaf), 3: createLeaf(bob, rhs_leaf) }
-    tree = SparseMerkleTree(4, leaves)
+    tree = SparseMerkleTree(2, leaves)
     root = tree.root
     old_leaf = []
     new_leaf = []
@@ -52,13 +52,10 @@ if __name__ == "__main__":
             root,
             "../depends/roll_up/contracts",
             )
-    prover = Prover(roll_up)
 
     # Wallet array
     wallets = []
     txs = []
-
-    prover = Prover()
 
     for i in range(nWallets):
         wallets.append(Wallet())
@@ -90,23 +87,18 @@ if __name__ == "__main__":
         print(txs[j])
     
     # # Get zk proof and merkle root
-    #genWitness(leaves, pub_x, pub_y, address, TREE_DEPTH, 
-    #                             rhs_leaf, new_leaf , R_x, R_y, S)              
+    proof, _root = generate_transfer_proof(txs)
 
-    # proof["a"] = hex2int(proof["a"])
-    # proof["a_p"] = hex2int(proof["a_p"])
-    # proof["b"] = [hex2int(proof["b"][0]), hex2int(proof["b"][1])]
-    # proof["b_p"] = hex2int(proof["b_p"])
-    # proof["c"] = hex2int(proof["c"])
-    # proof["c_p"] = hex2int(proof["c_p"])
-    # proof["h"] = hex2int(proof["h"])
-    # proof["k"] = hex2int(proof["k"])
-    # proof["input"] = hex2int(proof["input"]) 
+    proof["a"] = hex2int(proof["a"])
+    proof["a_p"] = hex2int(proof["a_p"])
+    proof["b"] = [hex2int(proof["b"][0]), hex2int(proof["b"][1])]
+    proof["b_p"] = hex2int(proof["b_p"])
+    proof["c"] = hex2int(proof["c"])
+    proof["c_p"] = hex2int(proof["c_p"])
+    proof["h"] = hex2int(proof["h"])
+    proof["k"] = hex2int(proof["k"])
+    proof["input"] = hex2int(proof["input"])
 
     # #root , merkle_tree = utils.genMerkelTree(TREE_DEPTH, leaves[0])
-    # try:
 
-    # except:
-
-    #     raise
-
+    # TODO do the rest of the testing :)

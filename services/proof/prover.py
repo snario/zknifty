@@ -23,6 +23,7 @@ sys.path.insert(0, '/root/roll_up/pythonWrapper')
 sys.path.insert(0, "/root/roll_up/depends/baby_jubjub_ecc/tests")
 sys.path.insert(0, '/root/roll_up/contracts')
 
+from SparseMerkleTree import SparseMerkleTree
 from helper import *
 from utils import getSignature, createLeaf, hashPadded, libsnark2python
 import ed25519 as ed
@@ -162,6 +163,10 @@ def generate_witness(leaves,
 
     for i in range(noTx): 
 
+        # tree = SparseMerkleTree(tree_depth, leaves[i])
+        # root, merkle_tree = tree.root, tree.tree
+        # proof = tree.create_merkle_proof(..someslot)
+
         root , merkle_tree = utils.genMerkelTree(tree_depth, leaves[i])
         path , address_bit = utils.getMerkelProof(leaves[i], address[i], tree_depth)
 
@@ -185,6 +190,7 @@ def generate_witness(leaves,
         r_y_bin_array.append(binary2ctypes(hexToBinary(r_y[i])))
         s_bin_array.append(binary2ctypes(hexToBinary(hex(s[i]))))
 
+    # Convert to ctypes for the snark
     pub_key_x_array = ((c.c_bool*256)*(noTx))(*pub_key_x)
     pub_key_y_array = ((c.c_bool*256)*(noTx))(*pub_key_y)
     merkle_roots = ((c.c_bool*256)*(noTx))(*roots)
@@ -196,9 +202,11 @@ def generate_witness(leaves,
     paths = ((c.c_bool*256)*(tree_depth) * noTx)(*paths)
     address_bits = ((c.c_bool)*(tree_depth) * noTx)(*address_bits)
 
+    # Call libsnark
     proof = prove(paths, pub_key_x_array, pub_key_y_array, merkle_roots,  address_bits, previous_owners, new_owners, r_x_bin, r_y_bin, s_bin, tree_depth, noTx)
 
+    # Decode ret data
     proof = json.loads(proof.decode("utf-8"))
-    root , merkle_tree = utils.genMerkelTree(tree_depth, leaves[0])
+    root, tree = utils.genMerkelTree(tree_depth, leaves[0])
 
     return(proof, root)
