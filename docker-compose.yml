@@ -21,6 +21,8 @@ services:
     networks:
       - blockchain
       - client
+    env_file:
+      - .default.env
 
   proof_service:
     build: ./services/proof
