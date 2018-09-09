@@ -25,8 +25,8 @@ def send_tx():
     uid = int(request.form['uid'])
     to_x = request.form['to_x']
     to_y = request.form['to_y']
-    # sig = request.form['sig']
-    return container.get_aggregator().send_transaction(uid, [to_x, to_y])
+    sig = request.form['sig']
+    return container.get_aggregator().send_transaction(uid, [to_x, to_y], sig)
 
 @aggregator.route('/submit_state', methods=['POST'])
 def submit_state():

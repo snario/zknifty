@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ethers from "ethers";
 
-import { fetchMerkleRoot, fetchMyTokens, fetchMerkleProof } from "../actions";
+import { sendToken, fetchMerkleRoot, fetchMyTokens, fetchMerkleProof } from "../actions";
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchMerkleRoot: () => dispatch(fetchMerkleRoot()),
     fetchMyTokens: () => dispatch(fetchMyTokens()),
-    fetchMerkleProof: (uid) => dispatch(fetchMerkleProof(uid))
+    fetchMerkleProof: (uid) => dispatch(fetchMerkleProof(uid)),
+    sendToken: (receiverPubKey, uid) => dispatch(sendToken(receiverPubKey, uid))
   };
 };
 
@@ -78,7 +79,7 @@ class ConnectedMerkleRoot extends Component {
                   </button>
                   <button
                     className="btn btn-link"
-                    onClick={ this.props.transferToken }>
+                    onClick={ () => this.props.sendToken([process.env.ALICE_PK_X, process.env.ALICE_PK_Y], el.uid) }>
                     Private Send
                   </button>
                 </td>

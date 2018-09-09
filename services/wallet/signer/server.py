@@ -8,6 +8,8 @@ signer = Blueprint('signer', __name__)
 def transfer():
     content = request.get_json()
     receiver_pub_key = content['receiver_pub_key']
+    receiver_pub_key[0] = int(receiver_pub_key[0])
+    receiver_pub_key[1] = int(receiver_pub_key[1])
     token_id = content['token_id']
 
     return container.get_signer().sign_transfer(receiver_pub_key, token_id)
