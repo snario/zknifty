@@ -20,3 +20,4 @@ The token contract will accept a new merkle root **only if** all the conditions 
 
 **Presentation Slides** : 
 https://docs.google.com/presentation/d/1aHfaHy_FPxF0fHw-9EuCTUImhFxwRv63mDTZMPVgdg0/edit?usp=sharing
+
