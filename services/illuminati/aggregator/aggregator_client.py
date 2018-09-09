@@ -55,14 +55,19 @@ class AggregatorClient(object):
         response = self.request(end_point, 'GET')
         return response.text
 
+    def get_coins(self, owner):
+        end_point = f'/coins/{owner}'
+        response = self.request(end_point, 'GET')
+        return response.text
+
     def get_proof(self, uid):
         end_point = f'/proof/{uid}'
         response = self.request(end_point, 'GET')
         return response.text
 
-    def send_transaction(self, uid, to, sig):
+    def send_transaction(self, uid, to): # , sig):
         end_point = '/send_tx'
-        data = {'uid': uid, 'to': to, 'sig': sig}
+        data = {'uid': uid, 'to': to} #, 'sig': sig}
         response = self.request(end_point, 'POST', data=data)
         return response.text
 
