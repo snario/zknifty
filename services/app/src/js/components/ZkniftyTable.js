@@ -72,7 +72,7 @@ class ConnectedMerkleRoot extends Component {
             <div key={ el.uid } className="mx-auto card" style={{"width": "18rem"}}>
               <img className="card-img-top" src={ UI[el.uid] }/>
               <div className="card-body">
-                <h5 className="card-title">{ el.title }</h5>
+                <h5 className="card-title">{ el.title } { el.verified ? "✅" : "❓" }</h5>
                 <a
                   onClick={ () => this.props.fetchMerkleProof(el.uid) }
                   className="card-link"
