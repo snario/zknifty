@@ -59,6 +59,8 @@ services:
     networks:
       - blockchain
       - illuminati
+    env_file:
+      - .default.env
     volumes:
       - ./services/illuminati/aggregator:/usr/src/app/aggregator
 
