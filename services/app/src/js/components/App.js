@@ -1,15 +1,12 @@
 import React from "react";
 
-import MerkleRoot from "./MerkleRoot";
+import ZkniftyTable from "./ZkniftyTable";
 import List from "./List";
 import Form from "./Form";
 
 const App = () => (
   <div className="row mt-5">
-    <div className="col-md-4 offset-md-1">
-      <h2>Merkle Root</h2>
-      <MerkleRoot />
-    </div>
+    <ZkniftyTable />
     {/* <div className="col-md-4 offset-md-1">
       <h2>Darkpool NFT</h2>
       <List />
