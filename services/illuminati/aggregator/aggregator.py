@@ -20,7 +20,8 @@ class Aggregator(object):
         self.pending_transactions = {} # pending_transactions that get reset
                                        # after each commitment
 
-    def send_transaction(self, uid, to):
+    # sender / to are both arrays
+    def send_transaction(self, uid, to, sig):
         """
             Sends coin to `to` and updates the state
         """
@@ -32,7 +33,11 @@ class Aggregator(object):
         # assert owner == self.coin_owners[uid]
         msg =f"Sent coin {uid} to {to}"
         self.coin_owners[uid] = to
-        self.pending_transactions[uid] = to
+        self.pending_transactions[uid] = {
+                # 'sender': sender,
+                'to': to,
+                'sig': sig
+                }
         print(msg)
         return msg
 
