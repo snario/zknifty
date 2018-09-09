@@ -24,8 +24,7 @@ module.exports = function(deployer) {
         await deployer.deploy(
             Miximus,
             verifier.address,
-            // FIXME: Use real root
-            "0x1eaa408e63a9f398689c6dd1bff4607276c66172a0f7c9fa916473278158ecbe"
+            "0xf1350f7ba69319cef6a77cd806caa21d7092441fd8061f70975e7be156794d2d"
         );
         await verifier.addIC(vk.IC);
     });
