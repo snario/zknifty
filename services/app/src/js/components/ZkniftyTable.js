@@ -71,7 +71,7 @@ class ConnectedMerkleRoot extends Component {
         {
           this.props.tokens.map(el => (
             <div key={ el.uid } className="mx-auto card" style={{"width": "18rem"}}>
-              <img className="card-img-top" src={ UI[el.uid] }/>
+              <img className="card-img-top m-3 pr-4" src={ UI[el.uid] }/>
               <div className="card-body">
                 <h5 className="card-title">{ el.title } { el.verified ? "✅" : "❓" }</h5>
                 <a
