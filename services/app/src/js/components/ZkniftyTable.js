@@ -3,16 +3,21 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ethers from "ethers";
 
-import { fetchMerkleRoot } from "../actions";
+import { fetchMerkleRoot, fetchMyTokens, fetchMerkleProof } from "../actions";
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMerkleRoot: () => dispatch(fetchMerkleRoot())
+    fetchMerkleRoot: () => dispatch(fetchMerkleRoot()),
+    fetchMyTokens: () => dispatch(fetchMyTokens()),
+    fetchMerkleProof: (uid) => dispatch(fetchMerkleProof(uid))
   };
 };
 
 const mapStateToProps = state => {
-  return { merkleRoot: state.merkleRoot };
+  return {
+    tokens: state.tokens,
+    merkleRoot: state.merkleRoot
+  };
 };
 
 const provider = new ethers
@@ -43,6 +48,7 @@ class ConnectedMerkleRoot extends Component {
 
   componentDidMount() {
     this.props.fetchMerkleRoot();
+    this.props.fetchMyTokens();
   }
 
   render() {
@@ -59,22 +65,26 @@ class ConnectedMerkleRoot extends Component {
             <td>Merkle Root</td>
             <td>{ this.props.merkleRoot }</td>
           </tr>
-          <tr>
-            <td>Token A Owner</td>
-            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
-          </tr>
-          <tr>
-            <td>Token B Owner</td>
-            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
-          </tr>
-          <tr>
-            <td>Token C Owner</td>
-            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
-          </tr>
-          <tr>
-            <td>Token D Owner</td>
-            <td>8ac254767001f13d0db03af324422b55804412fcfcd8147f05c5a73c650971ba</td>
-          </tr>
+          {
+            this.props.tokens.map(el => (
+              <tr key={ el.uid }>
+                <td>{ el.uid }</td>
+                <td>
+                  { el.title }
+                  <button
+                    className="btn btn-link"
+                    onClick={ () => this.props.fetchMerkleProof(el.uid) }>
+                    Verify
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={ this.props.transferToken }>
+                    Private Send
+                  </button>
+                </td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     );
