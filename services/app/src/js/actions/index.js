@@ -78,10 +78,9 @@ export const sendToken = (receiverPubKey, uid) => {
       }
     )
     .then(
-      response => response.json(),
+      response => console.log(response),
       error => console.log("❌ An error occurred.", error)
     )
-    .then(json => dispatch(receiveTransferToken()))
   };
 };
 
