@@ -14,7 +14,7 @@ def get_owner(uid):
     return str(container.get_aggregator().get_owner(int(uid)))
 
 @api.route('/coins', methods=['GET'])
-def get_coins(owner):
+def get_coins():
     x = int(request.args.get('x'))
     y = int(request.args.get('y'))
     # sig = int(request.args.get('sig'))
