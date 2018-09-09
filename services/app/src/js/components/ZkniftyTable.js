@@ -26,10 +26,10 @@ const provider = new ethers
   .JsonRpcProvider(process.env.ETHEREUM_JSONRPC_URL);
 
 const UI = {
-  0: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg",
-  1: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg",
-  2: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg",
-  3: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg"
+  0: "https://ethglobal.co/img/partners/ethwaterloo.png",
+  1: "https://ethglobal.co/img/partners/ethbuenosaires.png",
+  2: "https://ethglobal.co/img/partners/ethberlin.png",
+  3: "https://ethglobal.co/img/partners/ethsanfrancisco.svg"
 }
 
 class ConnectedMerkleRoot extends Component {
