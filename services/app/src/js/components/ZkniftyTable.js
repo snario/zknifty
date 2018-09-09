@@ -29,7 +29,7 @@ const UI = {
   0: "https://ethglobal.co/img/partners/ethwaterloo.png",
   1: "https://ethglobal.co/img/partners/ethbuenosaires.png",
   2: "https://ethglobal.co/img/partners/ethberlin.png",
-  3: "https://ethglobal.co/img/partners/ethsanfrancisco.svg"
+  3: "https://ethglobal.co/img/partners/ETHSF.svg"
 }
 
 class ConnectedMerkleRoot extends Component {
