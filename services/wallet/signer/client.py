@@ -49,3 +49,8 @@ class Client(object):
         return jsonify(
             valid=computed_hash == root
         )
+
+    def pub_key(self):
+        return jsonify(
+            pubkey=self.wallet.pub_key()
+        )

@@ -19,3 +19,7 @@ def verify_proof():
     proof = request.form['proof']
 
     return container.get_signer().verify_proof(root, token_id, proof)
+
+@api.route('/pub_key', methods=['GET'])
+def pub_key():
+    return container.get_signer().pub_key()
