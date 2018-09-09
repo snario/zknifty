@@ -5,7 +5,7 @@ import List from "./List";
 import Form from "./Form";
 
 const App = () => (
-  <div className="row mt-5">
+  <div>
       <ZkniftyTable />
     {/* <div className="col-md-4 offset-md-1">
       <h2>Darkpool NFT</h2>

@@ -64,34 +64,50 @@ class ConnectedMerkleRoot extends Component {
 
     return (
       <div>
-        <p>Block Number: <code>{ blockNumber }</code></p>
-        <p>Merkle Root: <code>{ this.props.merkleRoot }</code></p>
-        <h2>My tokens</h2>
-        <div className="row">
+        <section className="mt-5 jumbotron text-center">
+          <div className="container">
+            <h1 className="jumbotron-heading"><code>{ this.props.merkleRoot.substr(0, 10) }</code></h1>
+            <p className="lead text-muted">zknifty is an experiment in using an implementation of zero-knowledge merkle tree proofs to facilitate bulk transactions of non-fungible tokens on Ethereum.</p>
+          </div>
+        </section>
+
+        <div className="album py-5 bg-light">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12 mb-5" style={{"text-align":"center"}}><h2>My Private Tokens</h2></div>
+            </div>
+            <div className="row">
         {
           this.props.tokens.map(el => (
-            <div key={ el.uid } className="mx-auto card" style={{"width": "18rem"}}>
-              <img className="card-img-top m-3 pr-4" src={ UI[el.uid] }/>
-              <div className="card-body">
-                <h5 className="card-title">{ el.title } { el.verified ? "✅" : "❓" }</h5>
-                <a
-                  onClick={ () => this.props.fetchMerkleProof(el.uid) }
-                  className="card-link"
-                  href="#"
-                >
-                  Verify
-                </a>
-                <a
-                  onClick={ () => this.props.sendToken([process.env.ALICE_PK_X, process.env.ALICE_PK_Y], el.uid) }
-                  className="card-link"
-                  href="#"
-                >
-                  Private Send
-                </a>
+            <div className="col-md-4">
+              <div key={ el.uid } className="shadow-sm mb-4 card" style={{"width": "18rem"}}>
+                <img className="card-img-top m-3 pr-4" src={ UI[el.uid] }/>
+                <div className="card-body">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="btn-group">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={ () => this.props.fetchMerkleProof(el.uid) }
+                      >
+                        Verify
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={ () => this.props.sendToken([process.env.ALICE_PK_X, process.env.ALICE_PK_Y], el.uid) }
+                      >
+                        Private Send
+                      </button>
+                    </div>
+                    <small className="text-muted">{ el.verified ? "✅ Verified" : "Not Verified" }</small>
+                  </div>
+                </div>
               </div>
             </div>
           ))
         }
+        </div></div>
         </div>
       </div>
     );
