@@ -38,7 +38,7 @@ services:
 
   wallet:
     build: ./services/wallet
-    command: python -m signer --host 0.0.0.0 --port 5001
+    command: python -u -m signer --host 0.0.0.0 --port 5001
     ports:
       - 5001:5001
     networks:
