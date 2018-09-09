@@ -26,10 +26,10 @@ const provider = new ethers
   .JsonRpcProvider(process.env.ETHEREUM_JSONRPC_URL);
 
 const UI = {
-  0: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg",
-  1: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg",
-  2: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg",
-  3: "https://pbs.twimg.com/profile_images/1008479914612277248/xcnlNQOu_400x400.jpg"
+  0: "https://ethglobal.co/img/partners/ethwaterloo.png",
+  1: "https://ethglobal.co/img/partners/ethbuenosaires.png",
+  2: "https://ethglobal.co/img/partners/ethberlin.png",
+  3: "https://ethglobal.co/img/partners/ETHSF.svg"
 }
 
 class ConnectedMerkleRoot extends Component {
@@ -71,7 +71,7 @@ class ConnectedMerkleRoot extends Component {
         {
           this.props.tokens.map(el => (
             <div key={ el.uid } className="mx-auto card" style={{"width": "18rem"}}>
-              <img className="card-img-top" src={ UI[el.uid] }/>
+              <img className="card-img-top m-3 pr-4" src={ UI[el.uid] }/>
               <div className="card-body">
                 <h5 className="card-title">{ el.title } { el.verified ? "✅" : "❓" }</h5>
                 <a
